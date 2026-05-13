@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 client = OpenAI(
 
-    api_key="API_KEY",
+    api_key=os.environ.get("OPENAI_API_KEY"),
 
     base_url="https://api.deepseek.com"
 )
