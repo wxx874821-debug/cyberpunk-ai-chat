@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Cyberpunk AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 左侧角色栏 -->
+
+    <div class="sidebar">
+
+        <h2>Characters</h2>
+
+        <div class="character-card">
+
+            <img
+                src="/static/images/girl.jpg"
+                class="sidebar-avatar"
+            >
+
+            <span>Girl</span>
+
+        </div>
+
+        <div class="character-card">
+
+            <img
+                src="/static/images/hacker.jpg"
+                class="sidebar-avatar"
+            >
+
+            <span>Hacker</span>
+
+        </div>
+
+        <div class="character-card">
+
+            <img
+                src="/static/images/agent.jpg"
+                class="sidebar-avatar"
+            >
+
+            <span>Agent</span>
+
+        </div>
+
+    </div>
+
+    <!-- 主聊天区域 -->
+
+    <div class="main">
+
+        <div class="title">
+
+            NIGHT CITY AI
+
+        </div>
+
+        <!-- 聊天框 -->
+
+        <div class="chat-box" id="chat-box">
+
+            {% for msg in chat_history %}
+
+            <div
+                class="message {% if msg.sender == 'User' %}user{% else %}ai{% endif %}"
+            >
+
+                <!-- 头像 -->
+
+                <img
+                    class="avatar"
+                    src="{{ msg.avatar }}"
+                >
+
+                <!-- 气泡 -->
+
+                <div class="bubble">
+
+                    <div class="sender">
+
+                        {{ msg.sender }}
+
+                    </div>
+
+                    <div class="typing-text">
+
+                        {{ msg.text }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- 输入框 -->
+
+        <form method="POST">
+
+            <select name="role">
+
+                <option
+                    value="Girl"
+                    {% if role == "Girl" %}selected{% endif %}
+                >
+                    Girl
+                </option>
+
+                <option
+                    value="Hacker"
+                    {% if role == "Hacker" %}selected{% endif %}
+                >
+                    Hacker
+                </option>
+
+                <option
+                    value="Agent"
+                    {% if role == "Agent" %}selected{% endif %}
+                >
+                    Agent
+                </option>
+
+            </select>
+
+            <input
+                type="text"
+                name="message"
+                placeholder="Type your message..."
+                required
+            >
+
+            <button type="submit">
+
+                SEND
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- JS -->
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+
+</html>
